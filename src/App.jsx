@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
-import Modal from './component/modal';
+import Modal from './component/Portal/modal';
+import Input from './component/Ref/Input';
 function App() {
   const [modal, isModal] = useState(false)
+  const inputRef = useRef()
 
   const openModel = () => {
     isModal((prev) => !prev)
+  }
+
+  const onSubmit = () => {
+    console.log(inputRef.current.value,"current value")
   }
   return (
     <>
@@ -14,7 +20,11 @@ function App() {
         <button onClick={openModel}>
         <span className="close">&times;</span>
         </button>
-        </Modal>}
+      </Modal>}
+      <Input ref={inputRef} placeholder="type user"/>
+      <button onClick={onSubmit} style={{marginTop:'5px'}}>
+        Submit
+      </button>
     </>
   )
 }
