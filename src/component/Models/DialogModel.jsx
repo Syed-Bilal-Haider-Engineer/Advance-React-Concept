@@ -1,11 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../Portal/modal.css';
-function DialogModel({isOpen, onClose, children}) {
+
+function DialogModel({ isOpen, onClose, children }) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (dialog == null) return null;
+    if (!dialog) return;
 
     if (isOpen) {
       dialog.showModal();
@@ -16,17 +17,18 @@ function DialogModel({isOpen, onClose, children}) {
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (dialog == null) return null;
+    if (!dialog) return;
 
-    document.addEventListener('close', onClose);
+    const handleClose = () => onClose();
 
+    dialog.addEventListener('close', handleClose);
     return () => {
-      document.removeEventListener('close', onClose);
+      dialog.removeEventListener('close', handleClose);
     };
   }, [onClose]);
 
   return (
-    <dialog id="modal" ref={dialogRef} className={`modal dialog_modal'} `}>
+    <dialog ref={dialogRef} className="modal dialog_modal">
       <div className="modal-content">{children}</div>
     </dialog>
   );
