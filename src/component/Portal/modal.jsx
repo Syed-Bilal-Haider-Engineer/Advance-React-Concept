@@ -9,8 +9,8 @@ function Modal({children}) {
     <div id="myModal" className="modal">
     <div className="modal-content">
         {children}
+        <button type='submit'>Submit</button>
     </div>
-    <button type='submit' onSubmit={onSubmit}>Submit</button>
   </div>,
   model_root
   )
