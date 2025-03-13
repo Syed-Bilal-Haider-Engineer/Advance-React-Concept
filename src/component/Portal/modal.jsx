@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './modal.css';
-import { createPortal } from 'react-dom'
+import { createPortal } from 'react-dom';
 
 function Modal({children}) {
-  const model_root = document.getElementById('model-root');
-  
+   const id = document.getElementById('react-portal')
   return createPortal(
-    <div id="myModal" className="modal">
+  <div id="myModal" className="modal">
     <div className="modal-content">
         {children}
-        <button type='submit'>Submit</button>
     </div>
-  </div>,
-  model_root
+  </div>, id
   )
+
 }
 
 export default Modal
